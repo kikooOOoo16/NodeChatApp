@@ -79,9 +79,15 @@ $messageForm.addEventListener('submit', e => {
 
     socket.emit('sendMessage', message, resMessage => {
         if (resMessage.split(':')[0] === 'Error') {
-            alert(resMessage);
-            location.href = '/';
-            return;
+            if (resMessage.split(':')[1] === ' Profanity isn\'t allowed!') {
+                alert(resMessage);
+                location["href"] = location.href;
+                return;
+            } else {
+                alert(resMessage);
+                location.href = '/';
+                return;
+            }
         }
         $messageFormButton.removeAttribute('disabled');
         $messageFormInput.value = '';
